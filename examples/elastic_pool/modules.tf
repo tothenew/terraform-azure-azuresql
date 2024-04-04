@@ -35,13 +35,13 @@ resource "random_password" "admin_password" {
   override_special = "#$%&-_+{}<>:"
   upper            = true
   lower            = true
-  numeric           = true
+  numeric          = true
   length           = 32
 }
 
 #Elastic Pool
 module "sql_elastic" {
-  source  = "../../"
+  source = "../../"
 
   client_name         = var.client_name
   environment         = var.environment
@@ -54,10 +54,10 @@ module "sql_elastic" {
   administrator_password = random_password.admin_password.result
   create_databases_users = true
 
-  elastic_pool_enabled  = true
+  elastic_pool_enabled          = true
   public_network_access_enabled = true
-  allowed_cidr_list = ["182.71.160.186/32", "61.12.91.218/32"]
-  elastic_pool_max_size = "50"
+  allowed_cidr_list             = ["182.71.160.186/32", "61.12.91.218/32"]
+  elastic_pool_max_size         = "50"
   elastic_pool_sku = {
     tier     = "GeneralPurpose"
     capacity = 2

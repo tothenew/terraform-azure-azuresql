@@ -35,28 +35,28 @@ resource "random_password" "admin_password" {
   override_special = "#$%&-_+{}<>:"
   upper            = true
   lower            = true
-  numeric           = true
+  numeric          = true
   length           = 32
 }
 
 # Single Database
 
 module "sql_single" {
-  source  = "../../"
+  source = "../../"
 
-  client_name         = var.client_name
-  environment         = var.environment
-  location            = var.location
-  location_short      = var.location
-  stack               = var.stack
-  resource_group_name = azurerm_resource_group.rg.name
+  client_name            = var.client_name
+  environment            = var.environment
+  location               = var.location
+  location_short         = var.location
+  stack                  = var.stack
+  resource_group_name    = azurerm_resource_group.rg.name
   administrator_login    = "adminsqltest"
   administrator_password = random_password.admin_password.result
   create_databases_users = true
 
-  elastic_pool_enabled = false
+  elastic_pool_enabled          = false
   public_network_access_enabled = true
-  allowed_cidr_list = ["182.71.160.186/32", "61.12.91.218/32"]
+  allowed_cidr_list             = ["182.71.160.186/32", "61.12.91.218/32"]
 
   logs_destinations_ids = [
     module.log_analytics.workspace_id,
