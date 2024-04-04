@@ -1,8 +1,7 @@
 module "pool_logging" {
+  source = "git::https://github.com/tothenew/terraform-azure-diagnostics.git"
 
   count = var.logs_destinations_ids != toset([]) && var.elastic_pool_enabled ? 1 : 0
-
-  source = "git::https://github.com/tothenew/terraform-azure-diagnostics.git"
 
   resource_id = azurerm_mssql_elasticpool.elastic_pool[0].id
 
@@ -17,9 +16,9 @@ module "pool_logging" {
 }
 
 module "single_db_logging" {
-  for_each = { for db in var.databases : db.name => db if var.elastic_pool_enabled == false }
+  source = "git::https://github.com/tothenew/terraform-azure-diagnostics.git"
 
-  source = "git::https://github.com/tothenew/terraform-azure-diagnostics.git
+  for_each = { for db in var.databases : db.name => db if var.elastic_pool_enabled == false }
 
   resource_id = azurerm_mssql_database.single_database[each.key].id
 
@@ -36,10 +35,9 @@ module "single_db_logging" {
 
 
 module "elastic_pool_db_logging" {
-  for_each = { for db in var.databases : db.name => db if var.elastic_pool_enabled == true }
-
   source = "git::https://github.com/tothenew/terraform-azure-diagnostics.git"
 
+  for_each = { for db in var.databases : db.name => db if var.elastic_pool_enabled == true }
 
   resource_id = azurerm_mssql_database.elastic_pool_database[each.key].id
 
