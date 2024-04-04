@@ -11,7 +11,7 @@ and [Diagnostic settings](https://docs.microsoft.com/en-us/azure/sql-database/sq
 enabled.
 
 <!-- BEGIN_TF_DOCS -->
-## Global versioning rule for Claranet Azure modules
+## Global versioning rule for Azure modules
 
 | Module version | Terraform version | AzureRM version |
 | -------------- | ----------------- | --------------- |
@@ -199,15 +199,6 @@ module "sql_single" {
 | azurecaf | ~> 1.2, >= 1.2.22 |
 | azurerm | ~> 3.39 |
 
-## Modules
-
-| Name | Source | Version |
-|------|--------|---------|
-| custom\_users | ./modules/databases_users | n/a |
-| databases\_users | ./modules/databases_users | n/a |
-| elastic\_pool\_db\_logging | claranet/diagnostic-settings/azurerm | ~> 6.5.0 |
-| pool\_logging | claranet/diagnostic-settings/azurerm | ~> 6.5.0 |
-| single\_db\_logging | claranet/diagnostic-settings/azurerm | ~> 6.5.0 |
 
 ## Resources
 
